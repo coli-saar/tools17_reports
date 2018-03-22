@@ -1,0 +1,43 @@
+FROM phusion/baseimage 
+
+RUN apt-get update && apt-get install -y wget python git
+
+RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.1.tar.gz
+RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tagger-scripts.tar.gz
+RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/install-tagger.sh
+RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-par-linux-3.2-utf8.bin.gz
+RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz
+RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-par-linux-3.2-utf8.bin.gz
+RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french-par-linux-3.2-utf8.bin.gz
+RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-chunker-par-linux-3.2-utf8.bin.gz
+RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-chunker-par-linux-3.2-utf8.bin.gz 
+RUN wget https://nofile.io/g/CC9cePWUg0hVn39mBoXYa65ZDTvOWDDW9vIkQYRuzVNk51qn6BzzpkHwWl8beH17/beispielsatz.txt/ -O beispielsatz.txt
+RUN wget https://nofile.io/g/zukI12HW3amw5fjXTCB1iBCix28mOeTpuiHz5ZS08YCaJrKNK299HdQfiNMe1Goh/createLexicon.py/ -O createLexicon.py
+RUN wget https://nofile.io/g/d3tiaoD4j1rnSo2C28hiedtUAJjWmGIgmle06OLQ9JQJCEgSfm4mBS6H3lvgzFAw/de-train.txt/ -O de-train.txt
+RUN wget https://nofile.io/g/lfISShjjRxlcAetaURcdCHCzPd88K41iYMXDpxGvPgcfyKaoFQMCgzhRXz2OvoAR/universalLexiconDE.txt/ -O universalLexiconDE.txt
+RUN wget https://nofile.io/g/1d8TK6rKTds9AIvaRJGzD5DtWIkrcMMlG7Dvk3rJPxQgqAMfO5bcbqVJiYt5I8Jo/universalOpenFile.txt/ -O universalOpenFile.txt
+RUN wget https://nofile.io/g/ngtQjPPcswgnlape70KyMMgXZMlRN9dKrb6FaBP5trZnS2z8ApixrqtH4NOFwOPC/tiger22-train.tsv/ -O tiger.txt
+
+RUN tar xzvf tree-tagger-linux-3.2.1.tar.gz
+RUN tar xzvf tagger-scripts.tar.gz
+RUN gunzip german-par-linux-3.2-utf8.bin.gz
+RUN ln -s /german-par-linux-3.2-utf8.bin /lib/german-utf8.par
+RUN gunzip english-par-linux-3.2-utf8.bin.gz
+RUN ln -s /english-par-linux-3.2-utf8.bin /lib/english-utf8.par
+RUN gunzip spanish-par-linux-3.2-utf8.bin.gz
+RUN ln -s /spanish-par-linux-3.2-utf8.bin /lib/spanish-utf8.par
+RUN gunzip french-par-linux-3.2-utf8.bin.gz
+RUN ln -s /french-par-linux-3.2-utf8.bin /lib/french-utf8.par
+RUN gunzip english-chunker-par-linux-3.2-utf8.bin.gz
+RUN ln -s /english-chunker-par-linux-3.2-utf8.bin /lib/english-chunker-utf8.par
+RUN gunzip german-chunker-par-linux-3.2-utf8.bin.gz
+RUN ln -s /german-chunker-par-linux-3.2-utf8.bin /lib/german-chunker-utf8.par 
+
+RUN sed -i "s|BIN=./bin|BIN=/bin|g" /cmd/tree-tagger-german /cmd/tagger-chunker-german /cmd/tree-tagger-english cmd/tagger-chunker-english /cmd/tree-tagger-french /cmd/tree-tagger-spanish 
+RUN sed -i "s|LIB=./lib|LIB=/lib|g" /cmd/tree-tagger-german /cmd/tagger-chunker-german /cmd/tree-tagger-english cmd/tagger-chunker-english /cmd/tree-tagger-french /cmd/tree-tagger-spanish 
+RUN sed -i "s|CMD=./cmd|CMD=/cmd|g" /cmd/tree-tagger-german /cmd/tagger-chunker-german /cmd/tree-tagger-english cmd/tagger-chunker-english /cmd/tree-tagger-french /cmd/tree-tagger-spanish 
+
+ENV PATH "$PATH:/cmd:/bin:/.:" 
+
+
+
