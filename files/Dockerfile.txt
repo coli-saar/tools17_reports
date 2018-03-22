@@ -11,11 +11,11 @@ RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-pa
 RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french-par-linux-3.2-utf8.bin.gz
 RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-chunker-par-linux-3.2-utf8.bin.gz
 RUN wget http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-chunker-par-linux-3.2-utf8.bin.gz 
-RUN wget https://nofile.io/g/CC9cePWUg0hVn39mBoXYa65ZDTvOWDDW9vIkQYRuzVNk51qn6BzzpkHwWl8beH17/beispielsatz.txt/ -O beispielsatz.txt
+RUN wget https://raw.githubusercontent.com/coli-saar/tools17_reports/master/files/beispielsatz.txt?token=Ai0f9UnBMP2M7MdsdrjqEghkaDRW1RSqks5avNscwA%3D%3D -O beispielsatz.txt
 RUN wget https://nofile.io/g/zukI12HW3amw5fjXTCB1iBCix28mOeTpuiHz5ZS08YCaJrKNK299HdQfiNMe1Goh/createLexicon.py/ -O createLexicon.py
 RUN wget https://nofile.io/g/d3tiaoD4j1rnSo2C28hiedtUAJjWmGIgmle06OLQ9JQJCEgSfm4mBS6H3lvgzFAw/de-train.txt/ -O de-train.txt
 RUN wget https://nofile.io/g/lfISShjjRxlcAetaURcdCHCzPd88K41iYMXDpxGvPgcfyKaoFQMCgzhRXz2OvoAR/universalLexiconDE.txt/ -O universalLexiconDE.txt
-RUN wget https://nofile.io/g/1d8TK6rKTds9AIvaRJGzD5DtWIkrcMMlG7Dvk3rJPxQgqAMfO5bcbqVJiYt5I8Jo/universalOpenFile.txt/ -O universalOpenFile.txt
+RUN wget https://raw.githubusercontent.com/coli-saar/tools17_reports/master/files/universalOpenFile.txt?token=Ai0f9WDBLMcSdIF5WNxkM9vUx2kYfy_iks5avNuDwA%3D%3D -O universalOpenFile.txt
 RUN wget https://nofile.io/g/ngtQjPPcswgnlape70KyMMgXZMlRN9dKrb6FaBP5trZnS2z8ApixrqtH4NOFwOPC/tiger22-train.tsv/ -O tiger.txt
 
 RUN tar xzvf tree-tagger-linux-3.2.1.tar.gz
